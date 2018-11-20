@@ -1,0 +1,27 @@
+<html lang="ja">
+<head>
+<title></title>
+<body>
+<div>
+  <button id="play">Play</button>
+  <button id="stop">Stop</button>
+  <button>No Action</button>
+  <hr>
+  <p>iOS/MacのSafariではユーザイベントのハンドラで一度でも音を鳴らさないと音声再生制限がアンロックされない</p>
+  <p></p>
+</div>
+<script type="text/javascript" src="./sound.js"></script>
+<script type="text/javascript">
+// var event = "click";
+var event = "touchstart";
+document.addEventListener(event, function() {
+  sound.playSilent();
+  sound.loadFile("/sound/bell.mp3", function(buffer) {
+    setTimeout(function() { sound.play(buffer) }, 5000);
+  });
+});
+document.querySelector("#play").addEventListener("click", play);
+document.querySelector("#stop").addEventListener("click", stop);
+</script>
+</body>
+</html>

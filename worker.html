@@ -1,0 +1,33 @@
+<html lang="ja">
+<head>
+<title></title>
+<body>
+<div>
+  <button id="play">Play</button>
+  <button id="stop">Stop</button>
+</div>
+<script type="text/javascript" src="./sound.js"></script>
+<script type="text/javascript">
+
+var worker = new Worker('work.js');
+worker.addEventListener('message', function(e) {
+  sound.play("bell.mp3");
+}, false);
+
+// var event = "click";
+var event = "touchstart";
+
+document.addEventListener(event, function() {
+  sound.playSilent();
+
+  sound.loadFile("/sound/bell.mp3", function(buffer) {
+    console.log("hello");
+    worker.postMessage('Hello World');
+  });
+});
+
+document.querySelector("#play").addEventListener("click", play);
+document.querySelector("#stop").addEventListener("click", stop);
+</script>
+</body>
+</html>
